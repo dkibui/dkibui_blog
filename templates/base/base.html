@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href={% static "css/style.css" %} />
+    <link rel="stylesheet" href={% static "css/styles/default.min.css" %} />
+    
+    <link
+      rel="shortcut icon"
+      type="image/svg"
+      href="{% static 'img/favicon.svg' %}"
+    />
+    <title>Visign blogs - {{title}}</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="navigation width-long bg">        
+          <div><a href="/"><h1>DKIBUI</h1></a></div>
+          <div><a href="/about/">About</a></div>
+        </div>
+      </nav>
+      <div class="width">
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+        {% endfor%} {% endif %}
+      </div>
+      {% block content %} {% endblock %}
+    </div>
+    {% include 'blog/footer.html' %}
+    <script src={% static "js/highlight.min.js" %}></script>
+    <script>
+      let paragraph = document.querySelector('.year')
+      const d = new Date();
+      let currentYear = d.getFullYear()
+      paragraph.innerHTML = `&copy ${currentYear} | By David Kibui`
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

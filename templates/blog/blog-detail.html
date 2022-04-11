@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}  
+{% load markdownify %}
+{% block content %}
+<div class="container">
+  <article class="width">
+    <div class="image detail-img">
+      <img class="" src="media/{{ blog.image }}" alt="{{ blog.slug }}" />
+    </div>
+    <div data-id="{{blog.id}}" class="post">
+      <h2>{{blog.title}}</h2>
+      <div class="date">Posted on {{ blog.date_created | date:"F d, Y" }} by <a href="/kibui" class="author">{{ blog.author }}</a></div>
+      <div class="margin-top body-text">
+        <p class="body-p">{{ blog.content |markdownify }}</p>
+      </div>
+    </div>
+  </article>
+</div>
+{% endblock content %} {% comment %} | linebreaksbr {% endcomment %}
+{% comment %} <h2>{{count}} <b>{{tag}}</b> blogs</h2> {% endcomment %}
+{% comment %} Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.  {% endcomment %}
