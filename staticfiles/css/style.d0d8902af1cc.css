@@ -14,6 +14,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-color: var(--third-color);
 }
 
 nav {
@@ -229,7 +230,10 @@ code {
   font-size: 0.875rem;
 }
 
-ol,
+ol {
+  padding-left: 1rem;
+}
+
 ul {
   padding-left: 1.75rem;
 }
@@ -259,8 +263,6 @@ li:last-of-type {
 }
 
 .post {
-  background-color: var(--third-color);
-  padding: 0.7525rem 0.7525rem;
   margin-bottom: 1.5rem;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -356,6 +358,7 @@ li:last-of-type {
   }
 
   .post {
+    background-color: var(--third-color);
     padding: 1.7525rem 2.25rem;
   }
 
