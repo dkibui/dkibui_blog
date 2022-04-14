@@ -4,23 +4,24 @@
 
 <div class="container">
   {% include 'blog/includes/search.html' %}
+  <div class="search-result">
+    <div class="width">
+      {% if count > 1 and query %}
+          <h3>Search parameter '<i>{{query}}</i>' returned <b>{{count}}</b> blogs</h3>
+      {% elif count == 1 and query %}
+        <h3>Your search '<i>{{query}}</i>' returned <b>{{count}}</b> blog</h3>
+      {% elif query and count == 0 %}
+        <h3>'<i>{{query}}</i>' was not found, try a different term or <b><a href="/">Return to blogs</a></b></h3>
+      {% endif %}
+    </div>
 
-  <div class="width">
-    {% if count > 1 and query %}
-        <h2>Your search '<i>{{query}}</i>' returned <b>{{count}}</b> blogs</h2>
-    {% elif count == 1 and query %}
-      <h2>Your search '<i>{{query}}</i>' returned <b>{{count}}</b> blog</h2>
-    {% elif query and count == 0 %}
-      <h2>Nothing matched '<i>{{query}}</i>'. Try a different term or <b><a href="/">Return to blogs</a></b></h2>
-    {% endif %}
-  </div>
-
-  <div class="width">
-    {% if count > 1 and tag %}
-        <h2><b>{{count}}</b> blogs tagged as '<i>{{tag}}</i>'</h2>
-    {% elif count == 1 and tag %}
-      <h2><b>{{count}}</b> blog tagged as '<i>{{tag}}</i>'</h2>
-    {% endif %}
+    <div class="width">
+      {% if count > 1 and tag %}
+          <h3><b>{{count}}</b> blogs tagged as '<i>{{tag}}</i>'</h3>
+      {% elif count == 1 and tag %}
+        <h3><b>{{count}}</b> blog tagged as '<i>{{tag}}</i>'</h3>
+      {% endif %}
+    </div>
   </div>
 
   {% comment %} <div class="width">
@@ -59,6 +60,5 @@
       <p>{{ post.content | markdownify | truncatechars:120 }}</p>
     </div>
   </article>
-  {% endfor %}
-</div>
+  {% endfor %}</div>
 {% endblock content %}

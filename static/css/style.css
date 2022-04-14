@@ -11,9 +11,9 @@
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  --primary-color: #001D4A;
+  --primary-color: #001e4ae8;
   --secondary-color: #080808;
-  --third-color: #746D751a;
+  --third-color: rgba(69, 81, 128, 0.075);
   --color: #000f25;
 }
 
@@ -26,7 +26,6 @@ body {
 
 nav {
   background-color: var(--third-color);
-  padding: 0.525rem 0;
 }
 
 .navigation {
@@ -73,6 +72,12 @@ h3 {
   font-size: 0.975rem;
 }
 
+.search-result h3 {
+  font-weight: 400;
+  padding-left: 1rem;
+  margin-bottom: 1.45rem;
+}
+
 .detail-h2 {
   text-align: center;
   margin-top: 3rem;
@@ -80,7 +85,7 @@ h3 {
 
 a {
   text-decoration: none;
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 p {
@@ -185,8 +190,8 @@ label {
   border: none;
   outline: none;
   padding: 0.5rem 1rem;
-  font-size: 1.1rem;
   background-color: var(--third-color);
+  font-size: 00.8975rem;
 }
 
 .search input:focus {
@@ -197,10 +202,11 @@ label {
 .search input:first-of-type {
   padding-left: 1.1rem;
   flex-grow: 1;
+  color: inherit;
 }
 
 .search input:last-of-type {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   color: white;
 }
 
