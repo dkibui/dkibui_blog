@@ -13,7 +13,7 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --primary-color: #001e4ae8;
   --secondary-color: #080808;
-  --third-color: rgba(69, 81, 128, 0.075);
+  --third-color: hsla(293, 4%, 44%, 0.11);
   --color: #000f25;
 }
 
@@ -287,9 +287,11 @@ li:last-of-type {
 .blog {
   background-color: var(--third-color);
   padding: 1.25rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.11125rem;
   border-radius: 8px;
 }
+
+/* .blog:first-of-type  */
 
 .blog h3 {
   margin-bottom: 0.25rem;
@@ -338,14 +340,15 @@ li:last-of-type {
   gap: 0.2125rem;
   width: fit-content;
   margin: auto;
+  margin-top: 0.65rem;
   margin-bottom: 1.75rem;
 }
 
 .pagination a {
   padding: 0.1125rem 0.575rem;
-  background-color: hsl(201, 42%, 57%);
+  background-color: var(--third-color);
   border-radius: 3px;
-  color: white;
+  color: inherit;
 }
 
 .footer {
@@ -388,6 +391,10 @@ li:last-of-type {
 
   h3 {
     font-size: 1.075rem;
+  }
+
+  .blog {
+    margin-bottom: 1.75rem;
   }
 
   .input {
