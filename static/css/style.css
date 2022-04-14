@@ -227,7 +227,16 @@ codepre::-webkit-scrollbar {
 
 code {
   font-family: Consolas, 'Fira Code', monospace;
-  font-size: 0.875rem;
+  font-size: 0.7875rem;
+}
+
+p span {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 0.0525em 0.35em;
+  background-color: var(--third-color);
+  font-size: 0.775rem;
+  outline: 1px solid #266d704d;
 }
 
 ol {
