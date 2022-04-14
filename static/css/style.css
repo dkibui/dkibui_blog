@@ -1,13 +1,20 @@
+/* 
+#001D4A
+#746D75
+#746D75
+#D65108
+*/
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  --primary-color: #266e70;
-  --secondary-color: hsl(201, 42%, 57%);
-  --third-color: #266d7011;
-  --color: rgb(5, 5, 5);
+  --primary-color: #001D4A;
+  --secondary-color: #080808;
+  --third-color: #746D751a;
+  --color: #000f25;
 }
 
 body {
@@ -19,7 +26,7 @@ body {
 
 nav {
   background-color: var(--third-color);
-  padding: 0.575rem 0;
+  padding: 0.525rem 0;
 }
 
 .navigation {
@@ -30,11 +37,21 @@ nav {
 
 h1 {
   color: var(--primary-color);
-  font-weight: 700;
+  font-size: 1.2575rem;
+  line-height: 1.2;
+  margin-top: 0.752em;
+  margin-bottom: 1.5em;
+  font-weight: 600;
 }
 
-.navigation h1 {
+.post h1 {
+  margin-bottom: 0.75em;
+}
+
+.navigation .logo {
+  font-weight: 700;
   font-size: 2em;
+  color: var(--primary-color);
 }
 
 h2,
@@ -72,11 +89,7 @@ p {
   color: var(--color);
 }
 
-.about h1 {
-  margin-bottom: 3.2rem;
-}
-
-.body-text,
+.body-text p,
 .about p {
   margin-bottom: 1.25rem;
 }
@@ -155,7 +168,7 @@ label {
 .tag {
   padding: 0.125rem 0.45rem;
   background-color: var(--primary-color);
-  background-color: rgba(128, 128, 128, 0.233);
+  background-color: #55bebe;
   border-radius: 3px;
   color: white;
 }
@@ -347,6 +360,10 @@ li:last-of-type {
 }
 
 @media only screen and (min-width: 428px) {
+  h1 {
+    font-size: 1.5752rem;
+  }
+
   p {
     font-size: 1rem;
   }
@@ -373,7 +390,7 @@ li:last-of-type {
 
   .post {
     background-color: var(--third-color);
-    padding: 1.7525rem 2.25rem;
+    padding: 1.125rem 2.25rem 1.7525rem 2.25rem;
   }
 
   .image {
