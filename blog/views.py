@@ -18,7 +18,7 @@ count = 0
 def post_list(request):
     query = request.GET.get('query')
     context = {
-        "title": f"Updated Python and Django blog posts to upskill your web development knowledge and skills in {current_year}"}
+        "title": f"Sharing sought after tips and tricks about python and django web development. Helping you upskill your web development in {current_year}"}
     posts = Post.objects.all().filter(is_published=1)
     search_vector = SearchVector("title", "content")
     search_query = SearchQuery(query)
