@@ -8,7 +8,7 @@
     </div>
     <div data-id="{{blog.id}}" class="post">
       <h1>{{blog.title}}</h1>
-      <div class="date">Posted on {{ blog.date_created | date:"F d, Y" }} by <a href="/kibui" class="author">{{ blog.author }}</a></div>
+      <div class="date">Posted on {{ blog.date_created | date:"F d, Y" }} by <a href="/about/" class="author">{{ blog.author }}</a></div>
       <div class="margin-top body-text">
         <p class="body-p">{{ blog.content |markdownify }}</p>
       </div>

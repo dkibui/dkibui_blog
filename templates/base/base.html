@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learn to use django web framework with our easy to follow tutorials. We are regularly uploading new content so that you can keep learning"/>
     <link rel="stylesheet" href={% static "css/style.css" %} />
     <link rel="stylesheet" href={% static "css/styles/default.min.css" %} />
     
@@ -13,7 +14,7 @@
       type="image/svg"
       href="{% static 'img/favicon.svg' %}"
     />
-    <title>Visign blogs - {{title}}</title>
+    <title>{{title}} {% now "Y" %}</title>
   </head>
   <body>
     <div class="container">

@@ -14,7 +14,8 @@ count = 0
 
 def post_list(request):
     query = request.GET.get('query')
-    context = {"title": "home"}
+    context = {
+        "title": "Updated Python and Django blog posts to upskill your web development knowledge and skills in"}
     posts = Post.objects.all().filter(is_published=1)
     search_vector = SearchVector("title", "content")
     search_query = SearchQuery(query)
@@ -34,7 +35,8 @@ def post_list(request):
 
 def post_list_tag_filter(request, tag_slug=None):
     posts = Post.objects.all().filter(is_published=1)
-    context = {"title": "home"}
+    context = {
+        "title": "Updated Python and Django blog posts to upskill your web development knowledge and skills in"}
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
@@ -44,7 +46,7 @@ def post_list_tag_filter(request, tag_slug=None):
         page_obj = paginator.get_page(page_number)
         count = len(list(posts))
         context["tag"] = tag
-        context["title"] = tag
+        context["title"] = f"Learn from this curated list of {tag} blogs to upskill your web development knowledge and skills in "
         context["count"] = count
     if posts:
         context["posts"] = posts
@@ -58,12 +60,14 @@ def post_list_tag_filter(request, tag_slug=None):
 def blog_detail(request, slug):
     blog = Post.objects.get(slug=slug)
     context = {
-        "title": "blog details",
+        "title": f"{blog.title} -",
         "blog": blog
     }
     return render(request, 'blog/blog-detail.html', context)
 
 
 def about(request):
-    context = {"title": "about", }
+    text = '''My name is David Kibui, a Full Stack web engineer from in Nairobi, Kenya. This is my blog where I share my knowledge and skills with the world. My tech stack is Python(Django), JavaScript(Express and Svelte), Postgres and MongoDb
+    '''
+    context = {"title": f'{text} -'}
     return render(request, 'blog/about.html', context)
