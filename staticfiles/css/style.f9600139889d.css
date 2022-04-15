@@ -89,7 +89,7 @@ a {
 }
 
 p {
-  font-size: 0.8975rem;
+  font-size: 0.975rem;
   line-height: 1.8;
   color: var(--color);
 }
@@ -261,7 +261,7 @@ p span {
   padding: 0.007125em 0.35em;
   background-color: var(--third-color);
   font-size: 0.75rem;
-  outline: 1px solid #2c52854d;
+  outline: 1px solid #2f448b4d;
 }
 
 ol {
