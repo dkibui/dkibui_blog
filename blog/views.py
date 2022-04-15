@@ -42,7 +42,7 @@ def post_list(request):
 def post_list_tag_filter(request, tag_slug=None):
     posts = Post.objects.all().filter(is_published=1)
     context = {
-        "title": f"Updated Python and Django blog posts to upskill your web development knowledge and skills in {current_year}"}
+        "title": f"Upto date python and django blog articles to upskill your web development skills in {current_year}"}
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
@@ -52,7 +52,7 @@ def post_list_tag_filter(request, tag_slug=None):
         page_obj = paginator.get_page(page_number)
         count = len(list(posts))
         context["tag"] = tag
-        context["title"] = f"Learn from this curated list about {tag}. Upskill your web development skills in {current_year}"
+        context["title"] = f"Learn from a curated collection of tutorials about {tag}. {current_year} is your year to upskill as a developer"
         context["count"] = count
     if posts:
         context["posts"] = posts
