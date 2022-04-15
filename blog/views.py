@@ -6,6 +6,9 @@ from django.contrib import messages
 from taggit.models import Tag
 from blog.forms import PostForm
 from blog.models import Post
+from datetime import date
+
+current_year = date.today().year
 
 
 per_page = 10
@@ -15,12 +18,15 @@ count = 0
 def post_list(request):
     query = request.GET.get('query')
     context = {
-        "title": "Updated Python and Django blog posts to upskill your web development knowledge and skills in"}
+        "title": f"Updated Python and Django blog posts to upskill your web development knowledge and skills in {current_year}"}
     posts = Post.objects.all().filter(is_published=1)
     search_vector = SearchVector("title", "content")
     search_query = SearchQuery(query)
     if query:
-        context = {"query": query.strip() or None}
+        context = {
+            "query": query.strip() or None
+        }
+        context['title'] = f"List of available blogs about {query} in {current_year}"
         posts = posts.annotate(search=search_vector, rank=SearchRank(
             search_vector, search_query)).filter(search=query).order_by("-rank")
 
@@ -36,7 +42,7 @@ def post_list(request):
 def post_list_tag_filter(request, tag_slug=None):
     posts = Post.objects.all().filter(is_published=1)
     context = {
-        "title": "Updated Python and Django blog posts to upskill your web development knowledge and skills in"}
+        "title": f"Updated Python and Django blog posts to upskill your web development knowledge and skills in {current_year}"}
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
@@ -46,7 +52,7 @@ def post_list_tag_filter(request, tag_slug=None):
         page_obj = paginator.get_page(page_number)
         count = len(list(posts))
         context["tag"] = tag
-        context["title"] = f"Learn from this curated list of {tag} blogs to upskill your web development knowledge and skills in "
+        context["title"] = f"Learn from this curated list about {tag}. Upskill your web development skills in {current_year}"
         context["count"] = count
     if posts:
         context["posts"] = posts
@@ -60,7 +66,7 @@ def post_list_tag_filter(request, tag_slug=None):
 def blog_detail(request, slug):
     blog = Post.objects.get(slug=slug)
     context = {
-        "title": f"{blog.title} -",
+        "title": f"{blog.title} - {current_year}",
         "blog": blog
     }
     return render(request, 'blog/blog-detail.html', context)
@@ -69,5 +75,5 @@ def blog_detail(request, slug):
 def about(request):
     text = '''My name is David Kibui, a Full Stack web engineer from in Nairobi, Kenya. This is my blog where I share my knowledge and skills with the world. My tech stack is Python(Django), JavaScript(Express and Svelte), Postgres and MongoDb
     '''
-    context = {"title": f'{text} -'}
+    context = {"title": f'{text} - {current_year}'}
     return render(request, 'blog/about.html', context)
