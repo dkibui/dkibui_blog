@@ -18,7 +18,7 @@ count = 0
 def post_list(request):
     query = request.GET.get('query')
     context = {
-        "title": f"Sharing sought after tips and tricks about python and django web development. Helping you upskill your web development in {current_year}"}
+        "title": f"Sharing sought after python and django tips and tricks for web development. Here to help you upskill your web development in {current_year}"}
     posts = Post.objects.all().filter(is_published=1)
     search_vector = SearchVector("title", "content")
     search_query = SearchQuery(query)
@@ -26,7 +26,7 @@ def post_list(request):
         context = {
             "query": query.strip() or None
         }
-        context['title'] = f"List of available blogs about {query} in {current_year}"
+        context['title'] = f"Collection of available articles about {query} in {current_year}"
         posts = posts.annotate(search=search_vector, rank=SearchRank(
             search_vector, search_query)).filter(search=query).order_by("-rank")
 
@@ -52,7 +52,7 @@ def post_list_tag_filter(request, tag_slug=None):
         page_obj = paginator.get_page(page_number)
         count = len(list(posts))
         context["tag"] = tag
-        context["title"] = f"Learn from a curated collection of tutorials about {tag}. {current_year} is your year to upskill as a developer"
+        context["title"] = f"Learn from a curated collection of tutorials about {tag}. In {current_year} upskill yourself as a developer"
         context["count"] = count
     if posts:
         context["posts"] = posts
