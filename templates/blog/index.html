@@ -7,19 +7,19 @@
   <div class="search-result">
     <div class="width">
       {% if count > 1 and query %}
-          <h3>Search parameter '<i>{{query}}</i>' returned <b>{{count}}</b> blogs</h3>
+        <p>Your search <b><i>{{query}}</i></b> found <b>{{count}}</b> blogs</p>
       {% elif count == 1 and query %}
-        <h3>Your search '<i>{{query}}</i>' returned <b>{{count}}</b> blog</h3>
+        <p>Your search <b><i>{{query}}</i></b> found <b>{{count}}</b> blog</p>
       {% elif query and count == 0 %}
-        <h3>'<i>{{query}}</i>' was not found, try a different term or <b><a href="/">Return to blogs</a></b></h3>
+        <p><b><i>{{query}}</i></b> was not found, try a different term or <b><a href="/"><i>Return</i></a></b> to blogs</p>
       {% endif %}
     </div>
 
     <div class="width">
       {% if count > 1 and tag %}
-          <h3><b>{{count}}</b> blogs tagged as '<i>{{tag}}</i>'</h3>
+          <p><b>{{count}}</b> blogs matched <b><i>{{tag}}</i></b></p>
       {% elif count == 1 and tag %}
-        <h3><b>{{count}}</b> blog tagged as '<i>{{tag}}</i>'</h3>
+        <p><b>{{count}}</b> blog matched <b><i>{{tag}}</i></b></p>
       {% endif %}
     </div>
   </div>
@@ -57,7 +57,9 @@
           </div>
         </div>
       </div>
-      <p>{{ post.content | markdownify | truncatechars:120 }}</p>
+      <div class="blog-snippet">
+        <p>{{ post.content | markdownify | truncatechars:120 }}</p>
+      </div>
     </div>
   </article>
   {% endfor %}</div>
