@@ -4,23 +4,23 @@
 #746D75
 #D65108
 */
-* {
-  box-sizing: border-box;
+html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  --primary-color: #001e4ae8;
-  --secondary-color: #080808;
-  --third-color: hsla(293, 4%, 44%, 0.11);
-  --color: #000f25;
+}
+
+* {
+  box-sizing: border-box;
   vertical-align: baseline;
-  font-weight: inherit;
-  font-family: inherit;
-  font-style: inherit;
   font-size: 100%;
   border: 0 none;
   outline: 0;
   padding: 0;
   margin: 0;
+  --primary-color: #001e4ae8;
+  --secondary-color: #080808;
+  --third-color: hsla(293, 4%, 44%, 0.11);
+  --color: #000f25;
 }
 
 body {
@@ -40,34 +40,38 @@ nav {
   align-items: center;
 }
 
-h1 {
-  color: var(--primary-color);
-  font-size: 1.2575rem;
-  line-height: 1.2;
-  margin-top: 0.752em;
-  margin-bottom: 1.5em;
-  font-weight: 600;
-}
-
-.post h1 {
-  margin-bottom: 0.75em;
-}
-
 .navigation .logo {
   font-weight: 700;
   font-size: 2em;
   color: var(--primary-color);
 }
 
+h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-weight: 500;
-  line-height: 1.4;
-  margin-bottom: 0.3245rem;
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.4em;
   color: var(--primary-color);
+}
+
+h1 {
+  color: var(--primary-color);
+  font-size: 1.2575rem;
+  line-height: 1.2;
+}
+
+.blog h2 {
+  margin-bottom: 0.25em;
+}
+
+.blog p {
+  line-height: 1.5;
+  margin-top: 0.25rem;
 }
 
 h2 {
@@ -143,19 +147,20 @@ img {
   color: var(--primary-color);
   font-size: 0.752rem;
   font-weight: 600;
+  margin: 0;
 }
 
 .date-author {
   display: flex;
   align-items: center;
   gap: 0.275rem;
-  margin-bottom: 0.3245rem;
+  margin-bottom: 0.45rem;
 }
 
 .date,
 .author {
-  font-size: 0.8675rem;
-  color: rgb(81, 84, 97);
+  font-size: 0.775rem;
+  color: rgb(61, 61, 63);
 }
 
 .author {
@@ -416,7 +421,7 @@ li:last-of-type {
 
   .post {
     background-color: var(--third-color);
-    padding: 1.125rem 2.25rem 1.7525rem 2.25rem;
+    padding: 1.7525rem 2.25rem;
   }
 
   .image {
