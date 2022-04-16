@@ -7,13 +7,14 @@ from django.core.management.utils import get_random_secret_key
 # print('................')
 # print(get_random_secret_key())
 # print('................')
-
+# ...........................................................
 # default: "Django Administration"
-admin.site.site_header = 'DKIBUI BLOG'
+# admin.site.site_header = 'DKIBUI BLOG'
 # default: "Site administration"
-admin.site.index_title = 'Features area'
+admin.site.index_title = 'WELCOME TO DKIBUI BLOGS'
 # default: "Django site admin"
 admin.site.site_title = 'dkibui blog'
+# ...........................................................
 
 urlpatterns = [
     path('', include("blog.urls")),

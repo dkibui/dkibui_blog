@@ -324,7 +324,7 @@ li:last-of-type {
 }
 
 .python {
-  background-color: hsl(175, 42%, 57%);
+  background-color: #63bfb8;
 }
 
 .database {
@@ -332,7 +332,7 @@ li:last-of-type {
 }
 
 .models {
-  background-color: hsl(201, 42%, 57%);
+  background-color: #639fbf;
 }
 
 .django-admin {
