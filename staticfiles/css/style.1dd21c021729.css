@@ -1,9 +1,3 @@
-/* 
-#001D4A
-#746D75
-#746D75
-#D65108
-*/
 html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -11,15 +5,13 @@ html {
 
 * {
   box-sizing: border-box;
-  vertical-align: baseline;
-  font-size: 100%;
   border: 0 none;
   outline: 0;
   padding: 0;
   margin: 0;
   --primary-color: #001e4ae8;
   --secondary-color: #080808;
-  --third-color: hsla(293, 4%, 44%, 0.11);
+  --third-color: #746c751c;
   --color: #000f25;
 }
 
@@ -28,6 +20,58 @@ body {
   min-height: 100vh;
   flex-direction: column;
   background-color: var(--third-color);
+}
+
+h1,
+h2 {
+  color: var(--primary-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 0.35em;
+}
+
+h1 {
+  margin-top: 0.75em;
+  margin-bottom: 0.50em;
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.8;
+  color: rgb(0, 5, 34);
+}
+
+h1 {
+  font-size: 1.35em;
+}
+
+h2 {
+  font-size: 1.1250em;
+}
+
+h3 {
+  font-size: 1.0692em;
+}
+
+h4 {
+  font-size: 1.0125em;
+}
+
+h5 {
+  font-size: 0.9567em;
+}
+
+h6 {
+  font-size: 0.8875em;
 }
 
 nav {
@@ -46,62 +90,9 @@ nav {
   color: var(--primary-color);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 0.4em;
-  color: var(--primary-color);
-}
-
-h1 {
-  color: var(--primary-color);
-  font-size: 1.2575rem;
-  line-height: 1.2;
-}
-
-.blog h2 {
-  margin-bottom: 0.25em;
-}
-
-.blog p {
-  line-height: 1.5;
-  margin-top: 0.25rem;
-}
-
-h2 {
-  font-size: 1.125rem;
-}
-
-h3 {
-  font-size: 0.975rem;
-}
-
-.search-result h3 {
-  font-weight: 400;
-  padding-left: 1rem;
-  margin-bottom: 1.45rem;
-}
-
-.detail-h2 {
-  text-align: center;
-  margin-top: 3rem;
-}
-
 a {
   text-decoration: none;
   color: var(--primary-color);
-}
-
-p {
-  font-size: 0.975rem;
-  line-height: 1.8;
-  color: var(--color);
 }
 
 .body-text p,
@@ -165,7 +156,7 @@ img {
 
 .author {
   color: var(--primary-color);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 label {
@@ -182,7 +173,6 @@ label {
 
 .tag {
   padding: 0.125rem 0.45rem;
-  background-color: var(--primary-color);
   background-color: #55bebe;
   border-radius: 3px;
   color: white;
@@ -380,29 +370,35 @@ li:last-of-type {
   margin-top: 2.4rem;
 }
 
+.about h1 {
+  margin-bottom: 1.6rem;
+}
+
 @media only screen and (min-width: 428px) {
+
   h1 {
-    font-size: 1.5752rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: 600;
+    font-size: 1.5em;
+    margin-top: 0;
   }
 
   h2 {
-    font-size: 1.25rem;
+    font-size: 1.250em;
   }
 
   h3 {
-    font-size: 1.075rem;
+    font-size: 1.188em;
+  }
+
+  h4 {
+    font-size: 1.125em;
+  }
+
+  h5 {
+    font-size: 1.063em;
+  }
+
+  h6 {
+    font-size: 0.67rem;
   }
 
   .input {
@@ -430,5 +426,9 @@ li:last-of-type {
 
   .about {
     margin-top: 3.6rem;
+  }
+
+  .about h1 {
+    margin-bottom: 2.6rem;
   }
 }
