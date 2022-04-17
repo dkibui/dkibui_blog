@@ -258,7 +258,7 @@ code {
 }
 
 pre {
-  padding: .25rem .25rem .25rem .25rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.25rem;
   margin-top: 0.7875rem;
   margin-bottom: 1.5rem;
   background-color: var(--third-color);
@@ -271,7 +271,7 @@ codepre::-webkit-scrollbar {
 
 code {
   font-family: Consolas, 'Fira Code', monospace;
-  font-size: 0.8525rem;
+  font-size: 0.75725rem;
   line-height: 1.6;
 }
 
@@ -280,7 +280,7 @@ p span {
   border-radius: 5px;
   padding: 0.007125em 0.35em;
   background-color: var(--third-color);
-  font-size: 0.82575rem;
+  font-size: 0.725rem;
   outline: 1px solid #2f448b4d;
 }
 
