@@ -137,14 +137,19 @@ a {
   margin: auto;
 }
 
+.detail-img {
+  /* box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px; */
+}
+
 .detail-img img {
   display: block;
   width: 100%;
   margin-bottom: 0.75em;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   overflow: hidden;
-  margin-top: 3.2rem;
+  margin-top: 3.6rem;
+  box-shadow: rgba(33, 35, 38, 0.21) 0px -10px 20px -10px;
 }
 
 .tags-layout {
