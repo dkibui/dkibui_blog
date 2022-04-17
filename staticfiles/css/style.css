@@ -141,11 +141,10 @@ a {
   display: block;
   width: 100%;
   margin-bottom: 0.75em;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
   overflow: hidden;
   margin-top: 3.6rem;
-  box-shadow: rgba(33, 35, 38, 0.1) 0px -10px 10px -10px;
 }
 
 .tags-layout {
