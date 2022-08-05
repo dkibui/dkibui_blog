@@ -1,0 +1,8 @@
+{% extends "base/base.html" %} {% block content %}
+<div class="">
+  <main class="width about">
+    <h1>{{ details.title }}</h1>
+    {{ details.body | safe }}
+  </main>
+</div>
+{% endblock content %}

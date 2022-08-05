@@ -1,19 +1,36 @@
 {% extends "base/base.html" %}  
-{% load markdownify %}
 {% block content %}
 <div class="container">
-  <article class="width">
-    <div class="image detail-img">
-      <img class="" src="media/{{ blog.image }}" alt="{{ blog.slug }}" />
+  <main class="center-container">
+    <div class="width">
+        <div class="">
+            <h1>{{ post.title }}</h1>
+            <p class="date">Published on {{ post.created | date:"F d, Y" }} by {{ post.author }}</p>
+            {{ post.body | safe }}
+        </div>
     </div>
-    <div data-id="{{blog.id}}" class="post">
-      <h1>{{blog.title}}</h1>
-      <div class="date">Posted on {{ blog.date_created | date:"F d, Y" }} by <a href="/about/" class="author">{{ blog.author }}</a></div>
-      <div class="margin-top body-text">
-        <p class="body-p">{{ blog.content |markdownify }}</p>
-      </div>
+</main>
+<aside class="right-container">
+    <div class="aside-content">
+        <div class="tag-filters">
+            <h3>Use a tag to filter blogs</h3>
+            {% for tag in tags %}
+                <a href="{% url "blog:post_list_by_tag" tag.slug %}"><span class="tag-baloon">{{ tag.name }}</span></a>
+            {% endfor %}
+            <a href="{% url "blog:post_list" %}"><span class="tag-baloon">remove filter</span></a>
+        </div>
+        <div class="similar-posts">
+          <h3>You might also enjoy these posts</h3>
+          {% for post in similar_posts %}
+          <p>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+          </p>
+          {% empty %}
+            We don't have posts with similar content at the moment. Check back later.
+          {% endfor %}
+        </div>
     </div>
-  </article>
+</aside>
 </div>
 {% endblock content %} {% comment %} | linebreaksbr {% endcomment %}
 {% comment %} <h2>{{count}} <b>{{tag}}</b> blogs</h2> {% endcomment %}

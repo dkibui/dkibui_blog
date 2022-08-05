@@ -1,7 +1,5 @@
 {% extends "base/base.html" %}
-{% load markdownify %}
 {% block content %}
-
 <div class="container">
   {% include 'blog/includes/search.html' %}
   <div class="search-result">
@@ -23,14 +21,6 @@
       {% endif %}
     </div>
   </div>
-
-  {% comment %} <div class="width">
-    {% if tag == None or query == None and count > 1 %}
-    <h2>
-      Page <b>{{ page_obj.number }}</b> of <b>{{ page_obj.paginator.num_pages }}</b>. Total blogs, <b>{{count}}</b>
-    </h2>
-    {% endif %}
-  </div> {% endcomment %}
 
   {% for post in page_obj %}
   <article class="width">
@@ -58,7 +48,7 @@
         </div>
       </div>
       <div class="blog-snippet">
-        <p>{{ post.content | markdownify | truncatechars:120 }}</p>
+        <p>{{ post.content| truncatechars:120 }}</p>
       </div>
     </div>
   </article>

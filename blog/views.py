@@ -1,79 +1,124 @@
-from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
-from django.contrib import messages
+from django.views.decorators.http import require_POST
+from django.views.generic import ListView
+from django.core.mail import send_mail
+from django.db.models import Count
+from django.http import Http404
+#Third party imports
 from taggit.models import Tag
-from blog.forms import PostForm
-from blog.models import Post
-from datetime import date
+# Local imports
+from .models import Post, Comment
+from .forms import EmailPostForm, CommentForm
 
-current_year = date.today().year
+def test(request):
+    return render(request, 'blog/test.html')
 
-
-per_page = 10
-count = 0
-
-
-def post_list(request):
-    query = request.GET.get('query')
-    context = {
-        "title": f"Sharing sought after python and django tips and tricks for web development. Here to help you upskill your web development in {current_year}"}
-    posts = Post.objects.all().filter(is_published=1)
-    search_vector = SearchVector("title", "content")
-    search_query = SearchQuery(query)
-    if query:
-        context = {
-            "query": query.strip() or None
-        }
-        context['title'] = f"Collection of available articles about {query} in {current_year}"
-        posts = posts.annotate(search=search_vector, rank=SearchRank(
-            search_vector, search_query)).filter(search=query).order_by("-rank")
-
-    paginator = Paginator(posts, per_page)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    context["page_obj"] = page_obj
-    context["count"] = len(list(posts))
-
-    return render(request, 'blog/index.html', context)
-
-
-def post_list_tag_filter(request, tag_slug=None):
-    posts = Post.objects.all().filter(is_published=1)
-    context = {
-        "title": f"Upto date python and django blog articles to upskill your web development skills in {current_year}"}
-
+def post_list(request, tag_slug=None):
+    post_list = Post.published.all()
+    tags = Tag.objects.all()
+    tag = None
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
-        posts = posts.filter(tags__in=[tag])
-        paginator = Paginator(posts, per_page)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        count = len(list(posts))
-        context["tag"] = tag
-        context["title"] = f"Learn from a curated collection of tutorials about {tag}. In {current_year} upskill yourself as a developer"
-        context["count"] = count
-    if posts:
-        context["posts"] = posts
-        context["page_obj"] = page_obj
+        post_list = post_list.filter(tags__in=[tag])
+    # Pagination with 3 posts per page
+    paginator = Paginator(post_list, 10)
+    page_number = request.GET.get('page', 1)
+    try:
+        posts = paginator.page(page_number)
+    except PageNotAnInteger:
+        # If page_number is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        # If page_number is out of range deliver last page of results
+        posts = paginator.page(paginator.num_pages)
+    return render(request, 'blog/post_list.html', {'posts': posts, 'tag': tag, 'tags': tags})
+
+    # class PostListView(ListView):
+    # """Alternative post list view"""
+    # queryset = Post.published.all()
+    # context_object_name = 'posts'
+    # paginate_by = 3
+    # template_name = 'blog/post/list.html'
+
+
+def post_detail(request, year, month, day, post):
+    post = get_object_or_404(Post,
+                            #  status=Post.Status.PUBLISHED,
+                             slug=post,
+                             publish__year=year,
+                             publish__month=month,
+                             publish__day=day)
+    tags = Tag.objects.all()
+    # List of active comments for this post
+    comments = post.comments.filter(active=True)
+    # Form for users to comment
+    form = CommentForm()
+    # List of similar posts
+    post_tags_ids = post.tags.values_list('id', flat=True)
+    similar_posts = Post.published.filter(tags__in=post_tags_ids)\
+                                  .exclude(id=post.id)
+    similar_posts = similar_posts.annotate(same_tags=Count('tags'))\
+                                .order_by('-same_tags','-publish')[:4]
+    return render(request,
+                  'blog/blog-detail.html',
+                  {'post': post,
+                   'comments': comments,
+                   'tags': tags,
+                   'form': form,
+                   'similar_posts': similar_posts})
+
+
+def post_share(request, post_id):
+    # Retrieve post by id
+    # post = get_object_or_404(Post, id=post_id, status=Post.PB)
+    post = get_object_or_404(Post, id=post_id)
+    sent = False
+    if request.method == 'POST':
+        # Form was submitted
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            # Form fields passed validation
+            cd = form.cleaned_data
+            post_url = request.build_absolute_uri(post.get_absolute_url())
+            subject = f"{cd['name']} recommends you read " \
+                      f"{post.title}"
+            message = f"Read {post.title} at {post_url}\n\n" \
+                      f"{cd['name']}\'s comments: {cd['comments']}"
+            send_mail(subject, message, 'dkibui@gmail.com', [cd['to']])
+            sent = True
     else:
-        context["page_obj"] = ''
-
-    return render(request, 'blog/index.html', context)
-
-
-def blog_detail(request, slug):
-    blog = Post.objects.get(slug=slug)
-    context = {
-        "title": f"{blog.title} - {current_year}",
-        "blog": blog
-    }
-    return render(request, 'blog/blog-detail.html', context)
+        form = EmailPostForm()
+    return render(request, 'blog/post/share.html', {
+        'post': post,
+        'form': form,
+        'sent': sent
+    })
 
 
-def about(request):
-    text = '''My name is David Kibui, a Full Stack web engineer from in Nairobi, Kenya. This is my blog where I share my knowledge and skills with the world. My tech stack is Python(Django), JavaScript(Express and Svelte), Postgres and MongoDb
-    '''
-    context = {"title": f'{text} - {current_year}'}
-    return render(request, 'blog/about.html', context)
+@require_POST
+def post_comment(request, post_id):
+    post = get_object_or_404(
+        Post,
+        id=post_id,
+        # status=Post.PUBLISHED
+    )
+    comment = None
+    # A comment was posted
+    form = CommentForm(data=request.POST)
+    if form.is_valid():
+        # Create a Comment object without saving it to the database
+        comment = form.save(commit=False)
+        # Assign the post to the comment
+        comment.post = post
+        # Save the comment to the database
+        comment.save()
+    return render(request, 'blog/post/comment.html', {
+        'post': post,
+        'form': form,
+        'comment': comment
+    })
+
+
+

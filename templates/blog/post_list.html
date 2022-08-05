@@ -1,21 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="container">
+{% extends "base/base.html" %}
+{% block content %}
+<div class="container">
+    {% comment %} <aside class="left-container">
+    </aside> {% endcomment %}
+    <main class="center-container">
         <div class="width">
-            <h2>Publishers</h2>
-                {% for post in object_list %}
-                    <h3>{{ post.title }}</h3>
-                    <p>{{ post.date_created }}</p>
-                    <p>{{ post.content | truncatewords:150 }}</p>
-                {% endfor %}
+            {% for post in posts %}
+            <div class="list-item">
+                <h2>
+                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                </h2>
+                <p class="date">Published {{ post.created | timesince}}</p>
+                {{ post.body | safe | truncatewords:28 }}
+            </div>
+            {% endfor %}
         </div>
-    </div>
-</body>
-</html>
+    </main>
+    <aside class="right-container">
+        <div class="aside-content">
+            <p>In this article, we show how to prevent cross site request forgery (CSRF) in Django, So CRSF is a security issue that can compromise a user's and website's …</p>
+            <p>In this article, we explain the pip freeze command in Python. So pip freeze is a command that allows you to see what modules you have installed with …</p>
+            <div class="tag-filters">
+                <h3>Use a tag to filter blogs</h3>
+                {% for tag in tags %}
+                    <a href="{% url "blog:post_list_by_tag" tag.slug %}"><span class="tag-baloon">{{ tag.name }}</span></a>
+                {% endfor %}
+                <a href="{% url "blog:post_list" %}"><span class="tag-baloon">remove filter</span></a>
+            </div>
+        </div>
+    </aside>
+</div>
+{% endblock content %}

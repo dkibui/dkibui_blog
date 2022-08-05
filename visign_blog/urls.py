@@ -18,6 +18,7 @@ admin.site.site_title = 'dkibui blog'
 
 urlpatterns = [
     path('', include("blog.urls")),
+    path('', include("about.urls")),
     path('admin/', admin.site.urls),
 ]
 

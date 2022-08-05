@@ -1,30 +1,25 @@
-from django.contrib import admin
 from django.contrib.auth.models import Group
-import datetime
-from . import models
+from django.contrib import admin
+
+from .models import Post, Comment
 
 
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    def date_posted(self, obj):
-        return obj.date_created.date()
-
-    def is_updated(self, obj):
-        if (obj.updated_on - obj.date_created).total_seconds() > 120:
-            return 'Yes'
-        else:
-            return 'No'
-
-    list_display = ('title', 'date_posted', 'is_updated', 'is_published',
-                    "author")
-    search_fields = ['title', 'content']
-    list_filter = ("is_published", "author")
-    prepopulated_fields = {'slug': ('title',)}
+    list_display = ("title", "author", "publish", "status")
+    list_filter = ("created", "author", "publish", "status")
+    search_fields = ("title", "body")
+    prepopulated_fields = {"slug": ("title",)}
+    raw_id_fields = ("author",)
+    date_hierarchy = "publish"
+    ordering = ("status", "publish")
 
 
-# Register your models here.
-admin.site.register(models.Post, PostAdmin)
-admin.site.register(models.Category)
-admin.site.register(models.Comment)
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'post', 'created', 'active']
+    list_filter = ['active', 'created', 'updated']
+    search_fields = ['name', 'email', 'body']
 
 
 # Unregister modules

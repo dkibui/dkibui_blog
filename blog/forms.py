@@ -1,11 +1,14 @@
 from django import forms
-from .models import Post
+from .models import Comment
 
-# Create Post form
+class EmailPostForm(forms.Form):
+    name = forms.CharField(max_length=25)
+    email = forms.EmailField()
+    to = forms.EmailField()
+    comments = forms.CharField(required=False, widget=forms.Textarea)
 
 
-class PostForm(forms.ModelForm):
-
+class CommentForm(forms.ModelForm):
     class Meta:
-        model = Post
-        fields = ("title", "image", "content")
+        model = Comment
+        fields = ['name', 'email', 'body']
