@@ -4,7 +4,6 @@
     {% comment %} <aside class="left-container">
     </aside> {% endcomment %}
     <main class="center-container">
-        <div class="width">
             {% for post in posts %}
             <div class="list-item">
                 <h2>
@@ -14,7 +13,6 @@
                 {{ post.body | safe | truncatewords:28 }}
             </div>
             {% endfor %}
-        </div>
     </main>
     <aside class="right-container">
         <div class="aside-content">

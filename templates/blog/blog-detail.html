@@ -2,13 +2,11 @@
 {% block content %}
 <div class="container">
   <main class="center-container">
-    <div class="width">
         <div class="">
             <h1>{{ post.title }}</h1>
             <p class="date">Published on {{ post.created | date:"F d, Y" }} by {{ post.author }}</p>
             {{ post.body | safe }}
         </div>
-    </div>
 </main>
 <aside class="right-container">
     <div class="aside-content">

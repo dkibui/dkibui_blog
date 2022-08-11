@@ -10,16 +10,10 @@
 pre code.hljs {
   display: block;
   overflow-x: auto;
-  padding: 1em
-}
-
-code.hljs {
-  padding: 3px 5px
 }
 
 .hljs {
-  background: #f3f3f3;
-  color: #444
+  color: #1d1e20
 }
 
 .hljs-comment {
