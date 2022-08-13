@@ -17,8 +17,9 @@ EMAIL_PORT = config("EMAIL_PORT", default=25, cast=int)
 
 host1 = config("ALLOWED_HOST1")
 host2 = config("ALLOWED_HOST2")
+host3 = config("ALLOWED_HOST3")
 
-ALLOWED_HOSTS = [host1, host2]
+ALLOWED_HOSTS = [host1, host2, host3]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
