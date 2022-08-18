@@ -382,7 +382,7 @@ li:last-of-type {
 
   .right-container {
     padding: 0 1.2rem 1.2rem 1.2rem;
-    margin-top: 3.2rem;
+    margin-top: 3.75rem;
   }
 
   .aside-content {
@@ -390,10 +390,6 @@ li:last-of-type {
     /* Safari */
     position: sticky;
     top: 3.75rem;
-  }
-
-  .aside-content p:first-child {
-    margin-top: 0;
   }
 
   pre::-webkit-scrollbar,
