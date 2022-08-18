@@ -133,6 +133,12 @@ a:hover {
   color: var(--primary-color);
 }
 
+.width {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 .width-long {
   width: 92%;
   max-width: 1440px;
@@ -177,7 +183,7 @@ blockquote p {
 }
 
 .about {
-  text-align: center;
+  text-align: left;
 }
 
 .container {
