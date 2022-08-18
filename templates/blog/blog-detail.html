@@ -2,13 +2,11 @@
 {% block content %}
 <div class="container">
   <main class="center-container">
-        <div class="">
-            <h1>{{ post.title }}</h1>
-            <p class="date">Published on {{ post.created | date:"F d, Y" }} by {{ post.author }}</p>
-            {{ post.body | safe }}
-        </div>
-</main>
-<aside class="right-container">
+    <h1>{{ post.title }}</h1>
+    <p class="date">Published on {{ post.created | date:"F d, Y" }} by {{ post.author }}</p>
+    {{ post.body | safe }}
+  </main>
+  <aside class="right-container">
     <div class="aside-content">
         <div class="tag-filters">
             <h3>Use a tag to filter blogs</h3>
@@ -28,8 +26,6 @@
           {% endfor %}
         </div>
     </div>
-</aside>
+  </aside>
 </div>
-{% endblock content %} {% comment %} | linebreaksbr {% endcomment %}
-{% comment %} <h2>{{count}} <b>{{tag}}</b> blogs</h2> {% endcomment %}
-{% comment %} Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.  {% endcomment %}
+{% endblock content %}
