@@ -1,15 +1,13 @@
 {% extends "base/base.html" %}
 {% block content %}
 <div class="container">
-    {% comment %} <aside class="left-container">
-    </aside> {% endcomment %}
     <main class="center-container">
             {% for post in posts %}
             <div class="list-item">
                 <h2>
                     <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                 </h2>
-                <p class="date">Published {{ post.created | timesince}}</p>
+                <p class="date">Published {{ post.created | timesince}} ago</p>
                 {{ post.body | safe | truncatewords:28 }}
             </div>
             {% endfor %}
