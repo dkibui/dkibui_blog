@@ -233,6 +233,18 @@ blockquote p {
   font-weight: 700;
 }
 
+.list-item .date {
+  margin: 0;
+}
+
+.list-item p {
+  margin-top: 0;
+}
+
+.list-item a {
+  color: var(--text-color);
+}
+
 label {
   padding-bottom: 0.75rem;
   display: block;
