@@ -16,7 +16,7 @@
             <a href="{% url "blog:post_list" %}"><span class="tag-baloon">remove filter</span></a>
         </div>
         <div class="similar-posts">
-          <h3>You might also enjoy these posts</h3>
+          <h3>You might also enjoy the following</h3>
           {% for post in similar_posts %}
           <p>
             <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
