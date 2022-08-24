@@ -171,6 +171,7 @@ a:hover {
 
 blockquote {
   border-left: 8px solid var(--third-color);
+  border-bottom: 1px solid var(--third-color);
   padding: 0 1rem;
   margin: 2.2rem 0 2.2rem 0;
   display: block;
@@ -241,6 +242,7 @@ blockquote p {
 .list-item p {
   margin-top: 0;
   margin-top: 4px;
+  line-height: 1.675;
 }
 
 
@@ -288,9 +290,9 @@ table caption {
   margin-bottom: 0.5rem;
   text-align: left;
   font-size: 14px;
-  font-style: italic; 
-  font-weight: bold; 
-  opacity: 0.7125; 
+  font-style: italic;
+  font-weight: bold;
+  opacity: 0.7125;
 }
 
 th,
@@ -299,7 +301,7 @@ td {
   padding: 4px 8px;
   text-align: left;
   vertical-align: top;
-} 
+}
 
 pre {
   background-color: var(--code-background);
@@ -395,7 +397,7 @@ li:last-of-type {
   .container {
     width: 92%;
     max-width: 1000px;
-    grid-template-columns: 3fr 1.2fr;
+    grid-template-columns: 3fr 1.2975fr;
   }
 
   .center-container {
@@ -422,9 +424,9 @@ li:last-of-type {
   }
 
   pre::-webkit-scrollbar,
-code::-webkit-scrollbar {
-  display: none;
-}  
+  code::-webkit-scrollbar {
+    display: none;
+  }
 
   h1 {
     font-size: 1.5em;
