@@ -1,23 +1,24 @@
 {% extends "base/base.html" %}
 {% block content %}
-<div class="container">
+<div class="w-11/12 mx-auto border border-blue-500 ">
   {% include 'blog/includes/search.html' %}
   <div class="search-result">
     <div class="width">
       {% if count > 1 and query %}
-        <p>Your search <b><i>{{query}}</i></b> found <b>{{count}}</b> blogs</p>
+      <p>Your search <b><i>{{query}}</i></b> found <b>{{count}}</b> blogs</p>
       {% elif count == 1 and query %}
-        <p>Your search <b><i>{{query}}</i></b> found <b>{{count}}</b> blog</p>
+      <p>Your search <b><i>{{query}}</i></b> found <b>{{count}}</b> blog</p>
       {% elif query and count == 0 %}
-        <p><b><i>{{query}}</i></b> was not found, try a different term or <b><a href="/"><i>Return</i></a></b> to blogs</p>
+      <p><b><i>{{query}}</i></b> was not found, try a different term or <b><a href="/"><i>Return</i></a></b> to blogs
+      </p>
       {% endif %}
     </div>
 
     <div class="width">
       {% if count > 1 and tag %}
-          <p><b>{{count}}</b> blogs matched <b><i>{{tag}}</i></b></p>
+      <p><b>{{count}}</b> blogs matched <b><i>{{tag}}</i></b></p>
       {% elif count == 1 and tag %}
-        <p><b>{{count}}</b> blog matched <b><i>{{tag}}</i></b></p>
+      <p><b>{{count}}</b> blog matched <b><i>{{tag}}</i></b></p>
       {% endif %}
     </div>
   </div>
@@ -30,7 +31,7 @@
       </a>
       <div class="date-author-tag">
         <div class="date-author">
-          <div class="date">Posted {{ post.date_created | timesince  }} ago By</div>
+          <div class="date">Posted {{ post.date_created | timesince }} ago By</div>
           <div class="author">
             <a href="/about/" class="author">{{post.author}}</a>
           </div>
@@ -39,10 +40,10 @@
           <p>Tags: </p>
           <div class="tags">
             {% for tag in post.tags.all %}
-            <a href="{% url "blog-list-tag" tag.slug %}">
+            <a href="{% url " blog-list-tag" tag.slug %}">
               <div class="tag {{ tag }}">{{ tag }}</div>
             </a>
-            {% if not forloop.last %} {% endif %} 
+            {% if not forloop.last %} {% endif %}
             {% endfor %}
           </div>
         </div>
@@ -52,5 +53,6 @@
       </div>
     </div>
   </article>
-  {% endfor %}</div>
+  {% endfor %}
+</div>
 {% endblock content %}

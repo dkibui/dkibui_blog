@@ -33,17 +33,21 @@ INSTALLED_APPS = [
     # Custom apps
     "blog",
     "about",
-    # 'markdownify.apps.MarkdownifyConfig',
     # Installed apps
     "psycopg2",
     "taggit",
     "ckeditor",
+    # Tailwind Configs
+    "tailwind",
+    "theme",
+    "django_browser_reload",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -72,23 +76,23 @@ TEMPLATES = [
 WSGI_APPLICATION = "visign_blog.wsgi.application"
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": config("DB_ENGINE"),
-        "NAME": config("DB_NAME"),
-        "USER": config("DB_USER"),
-        "PASSWORD": config("DB_PASSWORD"),
-        "HOST": config("DB_HOST"),
-        "POST": "",
-    }
-}
-
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
+#         "ENGINE": config("DB_ENGINE"),
+#         "NAME": config("DB_NAME"),
+#         "USER": config("DB_USER"),
+#         "PASSWORD": config("DB_PASSWORD"),
+#         "HOST": config("DB_HOST"),
+#         "POST": "",
 #     }
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -120,7 +124,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [
+    BASE_DIR / "static", 
+    # BASE_DIR / "theme/static/css/dist/",
+]
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -131,15 +138,19 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 
+# Tailwind registration
+TAILWIND_APP_NAME = 'theme'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+# Nodejs path
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
 CKEDITOR_CONFIGS = {
     "default": {
         "toolbar_Basic": [["-", "Bold", "Italic"]],
         "toolbar_YourCustomToolbarConfig": [
-            # {'name': 'clipboard', 'items': [
-            #     'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
-            # {'name': 'editing', 'items': [
-            #     'Find', 'Replace', '-', 'SelectAll']},
-            # '/',
             {
                 "name": "basicstyles",
                 "items": [
@@ -173,14 +184,16 @@ CKEDITOR_CONFIGS = {
             {"name": "links", "items": ["Link", "Unlink"]},
             # '/',
             {"name": "styles", "items": ["Format"]},
-            # {"name": "colors", "items": ["TextColor", "BGColor"]},
             {
                 "name": "insert",
                 "items": ["Table", "HorizontalRule"],
             },
             {
-                'name': 'source',
-                'items': ['Maximize', 'Source', ],
+                "name": "source",
+                "items": [
+                    "Maximize",
+                    "Source",
+                ],
             },
         ],
         "toolbar": "YourCustomToolbarConfig",  # put selected toolbar config here
@@ -200,58 +213,5 @@ CKEDITOR_CONFIGS = {
                 "codesnippet",
             ]
         ),
-    }
-}
-
-MARKDOWNIFY = {
-    "default": {
-        "MARKDOWN_EXTENSIONS": [
-            "markdown.extensions.fenced_code",
-            "markdown.extensions.extra",
-            # 'markdown.extensions.codehilite',
-        ],
-        "STRIP": False,
-        "LINKIFY_TEXT": {
-            "PARSE_URLS": False,
-            # Next key/value-pairs only have effect if "PARSE_URLS" is True
-            "PARSE_EMAIL": False,
-            "CALLBACKS": [],
-            "SKIP_TAGS": [],
-        },
-        "WHITELIST_TAGS": [
-            "a",
-            "abbr",
-            "acronym",
-            "b",
-            "blockquote",
-            "em",
-            "i",
-            "li",
-            "ol",
-            "p",
-            "strong",
-            "ul",
-            "code",
-            "span",
-            "div",
-            "class",
-            "pre",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6",
-        ],
-        "WHITELIST_ATTRS": [
-            "href",
-            "src",
-            "alt",
-            "class",
-        ],
-        "WHITELIST_PROTOCOLS": [
-            "http",
-            "https",
-        ],
     }
 }

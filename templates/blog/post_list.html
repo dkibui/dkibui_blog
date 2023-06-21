@@ -1,27 +1,34 @@
-{% extends "base/base.html" %}
+{% extends "_base/_base.html" %}
+
 {% block content %}
-<div class="container">
-    <main class="center-container">
-            {% for post in posts %}
-            <div class="list-item">
-                <h2>
-                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                </h2>
-                <p class="date">Published {{ post.created | timesince}} ago</p>
-                {{ post.body | safe | truncatewords:28 }}
+<div class="grid grid-cols-12 w-[90%] mx-auto max-w-[1280px] gap-12">
+    <div class="col-span-8">
+        <div class="mb-12">{% include "../includes/search.html" %}</div>
+        {% for post in posts %}
+        <div class="bg-pri-50 px-8 pt-5 pb-8 rounded-xl text-pri-800 shadow-md mb-6">
+            <h2 class="text-xl text-zinc-700 font-bold  mb-2">
+                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            </h2>
+            <p class="text-xs text-pri-500 font-bold mb-0">Published {{ post.publish | date:"M d, Y" }}</p>
+            <div class="">{{ post.body | safe | truncatechars_html:240 }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <aside class="col-span-4 text-pri-800 mt-[97px]">
+        <div class="">
+            <h3 class="mt-0">All blogs - ({{ tags.count }})</h3>
+            {% for tag in tags %}
+            <div
+                class="bg-pri-50 px-4 py-2 rounded-full mb-2 mr-1 inline-block cursor-pointer outline hover:outline-[3px] outline-pri-300 ">
+                <a href="{% url 'blog:list_by_tag' tag.slug %}" class="block">
+                    <span class="">{{ tag.name.title }}</span></a>
             </div>
             {% endfor %}
-    </main>
-    <aside class="right-container">
-        <div class="aside-content">
-            <p>In web development there's so much to learn but there's never enough time. To give yourself a chance, learn the 20% that does 80% first.</p>
-            <p>In this blog, I share useful articles with critical knowledge for Python developers.</p>
-            <div class="tag-filters">
-                <h3>Use a tag to filter blogs</h3>
-                {% for tag in tags %}
-                    <a href="{% url "blog:post_list_by_tag" tag.slug %}"><span class="tag-baloon">{{ tag.name }}</span></a>
-                {% endfor %}
-                <a href="{% url "blog:post_list" %}"><span class="tag-baloon">remove filter</span></a>
+            <div
+                class="bg-pri-50 px-4 py-2 rounded-full mb-2 mr-1 inline-block cursor-pointer outline hover:outline-4 outline-pri-300 ">
+                <a href="{% url 'blog:list' %}">
+                    <span class="">Remove filter</span>
+                </a>
             </div>
         </div>
     </aside>
